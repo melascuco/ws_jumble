@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>eu.atosresearch.health.pruebas</groupId>
+	<artifactId>propertiesfuera</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>propertiesfuera</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- *************** LOG4J*************** -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.8</version>
+		</dependency>
+
+		<!-- *************** COMMONS-LANG3*************** -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+
+		<!-- *************** COMMONS-CONFIGURATION*************** -->
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.8</version>
+		</dependency>
+	</dependencies>
+
+
+	<!-- Para crear un solo jar http://chuwiki.chuidiang.org/index.php?title=Crear_un_solo_jar -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>freehep-maven</id>
+			<name>Maven FreeHEP</name>
+			<url>http://java.freehep.org/maven2</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<plugins>
+			<!-- *************** UN SOLO JAR PLUGIN *************** -->
+			<plugin>
+				<groupId>org.freehep</groupId>
+				<artifactId>freehep-jarjar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jarjar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<!-- El siguiente trozo debemos ponerlo si queremos que se metan dentro 
+					del jar TODOS los jar de los que dependemos de forma no explicita en el pom.xml -->
+				<configuration>
+					<addTransitiveDependencies>true</addTransitiveDependencies>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
